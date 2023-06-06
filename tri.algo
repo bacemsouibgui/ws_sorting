@@ -1,0 +1,114 @@
+// tri simple_ bubble sorting
+// exple
+
+[5 1 4 2 8]
+// first pass i=0;
+[5 1 4 2 8]==> [1 5 4 2 8]
+[1 5 4 2 8]==> [1 4 5 2 8]
+[1 4 5 2 8]==> [1 4 2 5 8]
+[1 4 2 5 8]==> [1 4 2 5 8]
+
+// i=1
+[1 4 2 5 8]==> [1 4 2 5 8]
+[1 4 2 5 8]==> [1 2 4 5 8]
+[1 2 4 5 8]==>[1 2 4 5 8]
+[1 2 4 5 8]==> [1 2 4 5 8]
+
+// i=2 without any swap
+
+PROCEDURE swap (var xp: INTEGER, var yp: INTEGER)
+VAR
+    tmp: INTEGER;
+BEGIN
+    
+    tmp:= xp;
+    xp:= yp;
+    yp:= tmp;
+    
+END
+
+PROCEDURE bubble_sort(var tab : ARRAY_OF INTEGER[n])
+VAR
+    i, n : INTEGER;
+BEGIN
+    
+    FOR i FROM 0 TO n-1  DO
+    FOR j FROM 0 TO n-i-1  DO
+    
+    IF (tab[j]> tab[j+1]) THEN
+        
+        swap( tab[j], tab[j+1])
+    END_IF
+        
+    END_FOR    
+        
+    END_FOR
+END
+
+// tri selection
+[64 25 12 22 11]
+// trouver l'element minimum dans arr [0..4]
+// on le place au debut
+[11 25 12 22 64]
+on prnd le tab [25 12 22 64]
+// on cherche le minimum dans arr [1..4]==> 12
+// on le place au debut
+[11 12 25 22 64]
+// on parcours le tableau arr [2..4] et on cherche le minimum et on le place au debut
+[11 12 22 25 64]
+// on parcours le tableau [3..4] et on cherche le minimum et on le place au debut
+[11 12 22 25 64]==> tableau triee
+
+// PROCEDURE
+PROCEDURE selection(VAR arr: ARRAY_OF INTEGER)
+VAR
+    i,j,n, min: INTEGER
+BEGIN
+    n:= arr.length
+    FOR i FROM 0 TO n-1  DO
+        min:= i
+    FOR j FROM i+1 TO n-1  DO
+        
+        IF (arr[j]<arr[min]) THEN
+            
+            min:= j
+        END_IF
+
+    swap(arr[min], arr[j])
+    END_FOR
+        
+    END_FOR
+END
+
+// tri insertion
+
+[12 11 13 5 6]
+// i=1, 11 est le clee, puisque 11 est inferieur a 12..permutation
+11 12 13 5 6 
+// i=2, 13 est le clee; 13>12 et 13 >11 donc 13 reste
+11 12 13 5 6
+// i=3, 5 est le clee : 5<13 et 5<12 et 5< 11 donc 
+5 11 12 13 6
+// i=4, 6 est le clee 6<13 et 6< 12 et 6<11 mais 6>5
+5 6 11 12 13
+
+// PROCEDURE
+
+PROCEDURE insertion(var arr: ARRAY_OF INTEGER)
+VAR
+    i,j,n,current: INTEGER;
+BEGIN
+    
+    FOR i FROM 1 TO n-1  DO
+        current:= arr[i] // clee
+        j:= i-1;
+
+    WHILE (j>=0 and arr[j]> current) DO
+        
+        arr[j+1]= arr[j];
+        j:= j-1;
+    END_WHILE
+
+arr[j+1]= current 
+    END_FOR
+END
