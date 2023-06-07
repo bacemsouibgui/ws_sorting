@@ -1,0 +1,43 @@
+FUNCTION counting_sort(arr : ARRAY_OF INTEGER) : ARRAY_OF INTEGER
+VAR
+    output: ARRAY_OF INTEGER [30];
+    count: ARRAY_OF INTEGER [50];
+    i, max, size: INTEGER;
+BEGIN
+    
+    size:= arr.length-1;
+    max:= arr[0];
+
+FOR i FROM 1 TO size  DO
+    
+    IF (arr[i]> max) THEN
+        
+        max:= arr[i];
+    END_IF
+END_FOR
+
+//intitialize count array with all zeros
+FOR i FROM 0 TO max  DO
+    
+    count[i]:=0;
+END_FOR
+
+// store the count of each element
+
+FOR i FROM 0 TO size  DO
+    
+    count[arr[i]]:= count[arr[i]]+1;
+END_FOR
+
+// find the index of each element of the original array in count array and 
+// place the elements in output array
+
+FOR i FROM size TO 0 Step -1  DO
+    
+    output[count[arr[i]]-1]= arr[i];
+    count[arr[i]]:= count[arr[i]] -1
+END_FOR
+
+Return output;
+
+END

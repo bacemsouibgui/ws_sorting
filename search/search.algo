@@ -1,0 +1,79 @@
+// recherche lineaire/ simple / sequentielle
+
+FUNCTION linear_s(tab : ARRAY_OF INTEGER, x: INTEGER) : INTEGER 
+// big O ==> O(n)
+VAR
+    i,n: INTEGER;
+BEGIN
+    
+    i:=0;
+    WHILE (i<n) DO
+        
+        IF (tab[i]=x) THEN
+            
+            return i
+        END_IF
+
+    // incrementation
+    i:= i+1;
+    END_WHILE
+
+    return -1; // x n'existe pas dans ce tableau
+END
+
+// recherche binaire- binary search
+1/exigence: tableau deja triee
+2/technique: division & comparaison
+.......||...||...||...............
+==> big O==> O(n/2)
+x?
+m: moitiee=(left+right)/2
+etape 1: comparer x avec m (milieu)
+etape 2 : si x=m alors on a le resultat
+sinon:
+si x inferieur a m==>on prend juste la partie gauche.
+si x superieur a m==> on prend juste la partie droite.
+
+//on calcule le milieu:
+
+IF (n mod 2=0) THEN
+    
+    m=n/2
+ELSE
+m= tronc(n/2)+1
+END_IF
+
+exple
+[3  5  6  8  9  11  15]
+ 0  1  2  3  4   5  6==> n mod 2 = 0
+
+ m= n/2=3==> on prend m= 8
+
+[3  5  6  8  9  11  15   18] ==> 7 mod 2=1
+7/2=3.5==>3+1=4===> m=9 
+
+FUNCTION binear_search(tab: ARRAY_OF INTEGER[n],x: INTEGER) : INTEGER
+VAR
+    m, debut, fin: INTEGER
+BEGIN
+   debut:= 0;
+   fin: n-1;
+
+   WHILE (debut<fin) DO // debut= fin =x
+     
+     m:=(debut+fin)/2;
+     IF (tab[m]=x) THEN
+        
+        return (m)
+     END_IF
+
+     IF (tab[m]<x) THEN
+        
+        debut:= m+1;
+     END_IF
+     ELSE
+     fin:= m-1
+   END_WHILE
+   
+  
+END

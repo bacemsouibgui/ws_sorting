@@ -1,0 +1,50 @@
+FUNCTION jump_search(arr : ARRAY_OF INTEGER, x:INTEGER) : INTEGER
+VAR
+    
+    step, prev, n: INTEGER;
+BEGIN
+    
+ n:= arr.length;
+ // finding block size to be jumped
+ step:= sqrt(n) // racine carree
+ 
+ // finding the block where x is present if it is present
+
+ prev:=0;
+
+ WHILE (arr[min(step, n)-1]< x) DO
+    
+    prev:= step;
+    step:= step + sqrt(n);
+
+    IF (prev>=n) THEN
+        
+        return -1;
+    END_IF
+ END_WHILE
+
+// doing a linear search for x in block beginning with prev
+
+WHILE (arr[prev]<x) DO
+    prev:= prev+1;
+
+// if we reached next block and element is not present
+
+IF (prev= min(step,n)) THEN
+    
+    return -1;
+END_IF
+
+    
+END_WHILE
+
+// if element is found
+
+IF (arr[prev]=x) THEN
+    return prev
+
+ELSE
+ return -1;
+END_IF
+
+END
